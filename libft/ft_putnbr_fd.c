@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 18:09:50 by cdawai            #+#    #+#             */
+/*   Updated: 2024/08/16 18:18:07 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	length;
-
-	length = 0;
-	if (u == 0)
+	if (n == -2147483648)
 	{
-		print_char('0');
-		return (1);
+		ft_putstr_fd("-2147483648", fd);
+		return ;
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd((n % 10) + '0', fd);
 }

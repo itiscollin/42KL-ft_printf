@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 05:07:26 by cdawai            #+#    #+#             */
+/*   Updated: 2024/09/13 12:19:44 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int	length;
+	void	*pointer;
+	size_t	total_size;
 
-	length = 0;
-	if (u == 0)
+	if (count == 0 || size == 0)
+		return (malloc(1));
+	total_size = count * size;
+	if (total_size == 0 || total_size / count != size)
+		return (NULL);
+	pointer = malloc(total_size);
+	if (!pointer)
 	{
-		print_char('0');
-		return (1);
+		free(pointer);
+		return (NULL);
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	ft_memset(pointer, 0, total_size);
+	return (pointer);
 }

@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 19:25:50 by cdawai            #+#    #+#             */
+/*   Updated: 2024/08/16 19:35:16 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	length;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-	length = 0;
-	if (u == 0)
+	str = 0;
+	if (s1 != 0 && set != 0)
 	{
-		print_char('0');
-		return (1);
+		i = 0;
+		j = ft_strlen(s1);
+		while (s1[i] && ft_strchr(set, s1[i]))
+			i++;
+		while (s1[j - 1] && ft_strchr(set, s1[j - 1]) && j > i)
+			j--;
+		str = (char *)malloc(sizeof(char) * (j - i + 1));
+		if (str)
+			ft_strlcpy(str, &s1[i], j - i + 1);
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	return (str);
 }

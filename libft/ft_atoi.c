@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/14 16:50:36 by cdawai            #+#    #+#             */
+/*   Updated: 2024/08/16 00:58:57 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+int	ft_atoi(const char *str)
 {
-	int	length;
+	int	i;
+	int	result;
+	int	sign;
 
-	length = 0;
-	if (u == 0)
+	result = 0;
+	i = 0;
+	sign = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	if ((str[i] == '-' || str[i] == '+'))
 	{
-		print_char('0');
-		return (1);
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = (result * 10) + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }

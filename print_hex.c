@@ -6,98 +6,54 @@
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:30:18 by cdawai            #+#    #+#             */
-/*   Updated: 2024/10/28 23:52:27 by cdawai           ###   ########.fr       */
+/*   Updated: 2024/11/20 14:56:21 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-char	check_hextype(int num, char input)
+int	ft_putnbrbase(unsigned int x, char input)
 {
-	if (input == 'x' || input == 'p')
-	{
-		if (num >= 0 && num <= 9)
-			return ('0' + num);
-		else if (num >= 10 && num <= 15)
-			return ('a' + (num - 10));
-		else
-			return (0);
-	}
-	if (input == 'X')
-	{
-		if (num >= 0 && num <= 9)
-			return ('0' + num);
-		else if (num >= 10 && num <= 15)
-			return ('A' + (num - 10));
-		else
-			return (0);
-	}
+	char	*baselow;
+	char	*baseupper;
+
+	baselow = "0123456789abcdef";
+	baseupper = "0123456789ABCDEF";
+	if (input == 'x')
+		return (print_char(baselow[x]));
+	else if (input == 'X')
+		return (print_char(baseupper[x]));
 	return (0);
 }
 
-int	create_string(int x, int **arr)
+int	print_hex(unsigned long x, char input)
 {
-	int	temp;
-	int	j;
+	int	length;
 
-	j = 0;
-	temp = x;
-	while (temp > 16)
+	length = 0;
+	if (x >= 16)
 	{
-		j++;
-		temp = temp / 16;
+		length += print_hex(x / 16, input);
 	}
-	*arr = (int *)malloc((j + 1) * sizeof (int));
-	return (**arr);
-}
-
-int	print_hex(int x, char input)
-{
-	int			*arr;
-	int			i;
-	int			length;
-
-	i = 0;
-	create_string(x, &arr);
-	while (x > 16)
-	{
-		arr[i] = x % 16;
-		x = x / 16;
-		i++;
-	}
-	arr[i] = x % 16;
-	length = i;
-	while (i > -1)
-	{
-		ft_putchar_fd(check_hextype(arr[i], input), 1);
-		i--;
-	}
-	free (arr);
+	length += ft_putnbrbase(x % 16, input);
 	return (length);
 }
 
-int	print_ptrhex(int x, char input)
+int	print_ptr(void *ptr)
 {
-	int			*arr;
-	int			i;
-	int			length;
+	int	lenght;
 
-	i = 0;
-	create_string(x, &arr);
-	while (i < 7)
-	{
-		arr[i] = x % 16;
-		x = x / 16;
-		i++;
-	}
-	arr[i] = x % 16;
-	length = i;
-	while (i > -1)
-	{
-		ft_putchar_fd(check_hextype(arr[i], input), 1);
-		i--;
-	}
-	free (arr);
-	return (length);
+	lenght = 0;
+	lenght += print_str("0x");
+	lenght += print_hex((unsigned long) ptr, 'x');
+	return (lenght);
 }
+// int	print_ptrhex(int x, char input)
+// {
+// 	int	length;
+
+// 	length = 0;
+// 	length += ft_putstr("0x");
+// 	length = print_hex(x, x);
+// }

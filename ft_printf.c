@@ -6,7 +6,7 @@
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:29:50 by cdawai            #+#    #+#             */
-/*   Updated: 2024/10/29 15:54:34 by cdawai           ###   ########.fr       */
+/*   Updated: 2024/11/20 14:56:45 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	print_type(const char *input, va_list *args)
 		length += print_int(va_arg(*args, int));
 	}
 	else if (*input == 'u')
-		length += print_unsignedint(va_arg(*args, int));
+		length += print_unsignedint(va_arg(*args, unsigned int));
 	else if (*input == 'x' || *input == 'X' )
-		length += print_hex((va_arg(*args, int)), *input);
+		length += print_hex((va_arg(*args, unsigned int)), *input);
 	else if (*input == '%')
 		length += print_char('%');
 	return (length);
@@ -64,20 +64,29 @@ int	ft_printf(const char *input, ...)
 	return (length);
 }
 
-int	main(void)
-{
-	char *str = "apple";
+// int	main(void)
+// {
+// 	char *str = "apple";
 	// printf("==Ptr is: %p==\n", str);
 	// ft_printf("Decimal is %d\n", 35631);
 	// ft_printf("Int is %i\n", 35631);
 	// ft_printf("Ptrf is: %p\n", str);
 	// ft_printf("hex is %x\n", 35631);
+	// ft_printf("hex is %x\n", -1);
+	// ft_printf("hex is %x\n", 16);
+	// ft_printf("hex is: %x\n", -16);
+	// printf("hex is: %x\n", -16);
+	// ft_printf("hex is: %x\n", 17);
+
 	// ft_printf("Hex is %X\n", 35631);
+	// ft_printf("Unsigned is: %u", -1);
 	// ft_printf("Just print %%\n");
-	// printf("Test for p: %p", "apple");
-	printf("test %i");
-	return (0);
-}
+	// ft_printf("Print pointer: %p\n", str);
+	// printf("Test for p: %p", str);
+	// printf("printf: %u\n", -1);
+	// ft_printf("test: %u", (unsigned) -1);
+// 	return (0);
+// }
 
 // Handle the Conversions:
 

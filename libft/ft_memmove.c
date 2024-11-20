@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 03:38:10 by cdawai            #+#    #+#             */
+/*   Updated: 2024/09/08 16:50:51 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	int	length;
+	char	*strdest;
+	char	*strsrc;
 
-	length = 0;
-	if (u == 0)
+	strsrc = (char *)src;
+	strdest = (char *)dest;
+	if (strsrc == (NULL) && strdest == (NULL))
+		return (dest);
+	if (strdest > strsrc)
 	{
-		print_char('0');
-		return (1);
+		strdest += len;
+		strsrc += len;
+		while (len-- > 0)
+			*--strdest = *--strsrc;
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	else
+	{
+		while (len-- > 0)
+			*strdest++ = *strsrc++;
+	}
+	return (dest);
 }

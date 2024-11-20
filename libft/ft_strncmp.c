@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 09:46:44 by cdawai            #+#    #+#             */
+/*   Updated: 2024/09/08 18:12:49 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	length;
+	size_t	i;
 
-	length = 0;
-	if (u == 0)
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (i < n && s1[i] == s2[i])
 	{
-		print_char('0');
-		return (1);
+		if (s1[i] == '\0' || s2[i] == '\0')
+			return (0);
+		i++;
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	if (i < n)
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	return (0);
 }

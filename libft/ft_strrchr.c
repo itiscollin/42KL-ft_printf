@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/14 15:05:09 by cdawai            #+#    #+#             */
+/*   Updated: 2024/09/13 14:55:02 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+char	*ft_strrchr(const char *str, int c)
 {
-	int	length;
+	size_t	i;
 
-	length = 0;
-	if (u == 0)
+	i = ft_strlen(str);
+	while (i > 0)
 	{
-		print_char('0');
-		return (1);
+		if ((unsigned char)str[i] == (unsigned char)c)
+			return ((char *)&str[i]);
+		i--;
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	if ((unsigned char)str[0] == (unsigned char)c)
+		return ((char *)&str[0]);
+	return (NULL);
 }

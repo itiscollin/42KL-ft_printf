@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 03:23:47 by cdawai            #+#    #+#             */
+/*   Updated: 2024/09/08 20:05:15 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	length;
+	char		*d;
+	const char	*s;
 
-	length = 0;
-	if (u == 0)
+	d = (char *)dest;
+	s = (const char *)src;
+	if (!dest && !src)
+		return (NULL);
+	if (n == 0)
+		return (dest);
+	while (n--)
 	{
-		print_char('0');
-		return (1);
+		*d++ = *s++;
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	return (dest);
 }

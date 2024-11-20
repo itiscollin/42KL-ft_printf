@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 07:38:46 by cdawai            #+#    #+#             */
+/*   Updated: 2024/08/16 07:52:27 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+char	*ft_strdup(const char *s1)
 {
-	int	length;
+	char	*dup;
+	size_t	len;
 
-	length = 0;
-	if (u == 0)
-	{
-		print_char('0');
-		return (1);
-	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	len = ft_strlen(s1);
+	dup = ft_calloc(len + 1, sizeof(char));
+	if (!dup)
+		return (NULL);
+	ft_memcpy(dup, s1, len + 1);
+	return (dup);
 }

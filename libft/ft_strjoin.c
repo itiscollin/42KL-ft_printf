@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 19:01:45 by cdawai            #+#    #+#             */
+/*   Updated: 2024/09/12 18:28:26 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	length;
+	char	*newstr;
+	size_t	len1;
+	size_t	len2;
 
-	length = 0;
-	if (u == 0)
-	{
-		print_char('0');
-		return (1);
-	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	if (!s1 ||!s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	newstr = malloc(sizeof(char) *(len1 + len2 +1));
+	if (!newstr)
+		return (NULL);
+	ft_memcpy(newstr, s1, len1);
+	ft_memcpy(newstr + len1, s2, len2);
+	newstr[len1 + len2] = '\0';
+	return (newstr);
 }

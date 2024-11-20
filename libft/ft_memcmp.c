@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdawai <cdawai@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 21:30:43 by cdawai            #+#    #+#             */
-/*   Updated: 2024/11/07 16:35:45 by cdawai           ###   ########.fr       */
+/*   Created: 2024/08/16 04:38:30 by cdawai            #+#    #+#             */
+/*   Updated: 2024/08/16 04:50:19 by cdawai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	print_unsignedint(unsigned int u)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	length;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
 
-	length = 0;
-	if (u == 0)
+	str1 = (const unsigned char *)s1;
+	str2 = (const unsigned char *)s2;
+	while (n-- > 0)
 	{
-		print_char('0');
-		return (1);
+		if (*str1 != *str2)
+			return ((*str1 - *str2));
+		str1++;
+		str2++;
 	}
-	if (u >= 10)
-		length += print_unsignedint(u / 10);
-	length += print_char(u % 10 + '0');
-	return (length);
+	return (0);
 }
